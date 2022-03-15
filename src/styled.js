@@ -21,7 +21,7 @@ export const Title = styled.div`
   color: ${primaryColor};
 `;
 
-export const ContainerSearch = styled.div`
+export const ContainerSearch = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,13 +30,14 @@ export const ContainerSearch = styled.div`
 
 export const InputSearch = styled.input`
   background-color: ${primaryColor};
-  border: 3px solid ${primaryColor};
+  border: 6px solid ${primaryColor};
   border-radius: 5px;
   height: 30px;
   width: 250px;
+  font-weight: 500;
 `;
 
-export const InputSubmit = styled.button`
+export const InputSubmit = styled.input`
   background-color: ${fourthColor};
   border: 3px solid ${fourthColor};
   border-radius: 5px;

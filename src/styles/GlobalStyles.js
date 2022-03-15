@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { primaryColor } from '../config/colors';
+import { primaryColor, fourthColor } from '../config/colors';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
   *{
@@ -13,4 +14,15 @@ export default createGlobalStyle`
   body {
     background-color: ${primaryColor};
   }
+   body .Toastify .Toastify__toast-container .Toastify__toast--error {
+    --toastify-icon-color-error: #dddddd;
+    background-color: ${fourthColor};
+    color:${primaryColor};
+    .Toastify__progress-bar {
+      background-color: ${primaryColor};
+    }
+    .Toastify__close-button {
+      color: ${primaryColor};
+    }
+   }
 `;

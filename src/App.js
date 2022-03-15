@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import GlobalStyles from './styles/GlobalStyles';
 
 import {
@@ -17,7 +18,8 @@ function App() {
   const [pokemonName, setPokemonName] = useState('');
   const [pokemon, setPokemon] = useState(false);
 
-  const searchPokemon = () => {
+  const searchPokemon = (e) => {
+    e.preventDefault();
     Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
       .then((response) => {
         setPokemon({
@@ -29,24 +31,26 @@ function App() {
           defense: response.data.stats[2].base_stat,
           type: response.data.types[0].type.name,
         });
+        setPokemonName('');
       })
       .catch(() => {
-        setPokemon(false);
+        toast.error('Pokemon inválido');
       });
   };
   return (
     <PokeStats>
       <ContainerHeader>
         <Title>Pokemon Stats</Title>
-        <ContainerSearch>
+        <ContainerSearch onSubmit={searchPokemon}>
           <InputSearch
-            type={Text}
+            type="text"
             placeholder="Search..."
             onChange={(e) => {
               setPokemonName(e.target.value);
             }}
+            value={pokemonName}
           />
-          <InputSubmit onClick={searchPokemon}>Search Pokemon</InputSubmit>
+          <InputSubmit type="submit" />
         </ContainerSearch>
       </ContainerHeader>
       <Aside pokemon={pokemon}>
@@ -61,6 +65,7 @@ function App() {
         </ContainerPokemon>
       </Aside>
       <GlobalStyles />
+      <ToastContainer autoClose={2000} />
     </PokeStats>
   );
 }
